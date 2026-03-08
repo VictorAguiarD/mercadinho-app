@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercadinho - Nova Venda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar p-3" style="width: 250px;">
+            <h4 class="text-center mb-4">🛒 Mercadinho</h4>
+            <nav>
+                <a href="index.html"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
+                <a href="vendas.html" class="active"><i class="bi bi-cart me-2"></i> Nova Venda</a>
+                <a href="produtos.html"><i class="bi bi-box-seam me-2"></i> Produtos</a>
+                <a href="relatorios.html"><i class="bi bi-file-earmark-bar-graph me-2"></i> Relatórios</a>
+            </nav>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-grow-1 p-4">
+            <h2 class="mb-4">Ponto de Venda (PDV)</h2>
+
+            <div class="row">
+                <!-- Select Products -->
+                <div class="col-md-7">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Adicionar Produto</h5>
+                            <div class="row g-3">
+                                <div class="col-md-8">
+                                    <label class="form-label">Produto (Busca)</label>
+                                    <select id="produtoSelect" class="form-select">
+                                        <option value="">Selecione um produto...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Quantidade</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="quantidadeInput" value="1"
+                                            min="1">
+                                        <button class="btn btn-primary" type="button"
+                                            onclick="adicionarAoCarrinho()">Adicionar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Lista de Produtos</h5>
+                            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                <table class="table table-hover align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Preço</th>
+                                            <th>Estoque</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listaProdutosTable">
+                                        <!-- Dynamically loaded product list for quick add -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart -->
+                <div class="col-md-5">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Carrinho de Compras</h5>
+
+                            <div class="flex-grow-1 table-responsive mb-3" style="min-height: 250px;">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Produto</th>
+                                            <th>Qtd</th>
+                                            <th>Subtotal</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="carrinhoTable">
+                                        <!-- Cart items go here -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="border-top pt-3">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h4>Total:</h4>
+                                    <h4 id="valorTotal" class="text-success fw-bold">R$ 0,00</h4>
+                                </div>
+                                <button class="btn btn-success w-100 py-3 fs-5" onclick="finalizarVenda()"
+                                    id="btnFinalizar" disabled>
+                                    <i class="bi bi-check-circle me-2"></i> Finalizar Venda
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/vendas.js"></script>
+</body>
+
+</html>
